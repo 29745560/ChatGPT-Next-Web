@@ -7,7 +7,6 @@ import { IconButton } from "./button";
 import styles from "./home.module.scss";
 
 import SettingsIcon from "../icons/settings.svg";
-import GithubIcon from "../icons/github.svg";
 import ChatGptIcon from "../icons/chatgpt.svg";
 import SendWhiteIcon from "../icons/send-white.svg";
 import BrainIcon from "../icons/brain.svg";
@@ -27,7 +26,6 @@ import { copyToClipboard, downloadAs, isIOS, selectOrCopy } from "../utils";
 import Locale from "../locales";
 
 import dynamic from "next/dynamic";
-import { REPO_URL } from "../constant";
 import { ControllerPool } from "../requests";
 import { Prompt, usePromptStore } from "../store/prompt";
 
@@ -611,9 +609,9 @@ export function Home() {
         className={styles.sidebar + ` ${showSideBar && styles["sidebar-show"]}`}
       >
         <div className={styles["sidebar-header"]}>
-          <div className={styles["sidebar-title"]}>ChatGPT Next</div>
+          <div className={styles["sidebar-title"]}>RongChat</div>
           <div className={styles["sidebar-sub-title"]}>
-            Build your own AI assistant.
+            白水实验室出品
           </div>
           <div className={styles["sidebar-logo"]}>
             <ChatGptIcon />
@@ -650,11 +648,6 @@ export function Home() {
                   setShowSideBar(false);
                 }}
               />
-            </div>
-            <div className={styles["sidebar-action"]}>
-              <a href={REPO_URL} target="_blank">
-                <IconButton icon={<GithubIcon />} />
-              </a>
             </div>
           </div>
           <div>
