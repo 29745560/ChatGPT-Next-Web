@@ -94,11 +94,6 @@ export function Settings(props: { closeSettings: () => void }) {
       });
   }
 
-  useEffect(() => {
-    checkUsage();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   const accessStore = useAccessStore();
   const enabledAccessControl = useMemo(
     () => accessStore.enabledAccessControl(),
