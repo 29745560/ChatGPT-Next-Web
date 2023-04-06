@@ -106,7 +106,6 @@ export function Settings(props: { closeSettings: () => void }) {
   const showUsage = !!accessStore.token || !!accessStore.accessCode;
 
   useEffect(() => {
-    checkUpdate();
     showUsage && checkUsage();
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
