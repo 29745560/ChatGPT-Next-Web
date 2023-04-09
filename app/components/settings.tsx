@@ -139,7 +139,14 @@ export function Settings(props: { closeSettings: () => void }) {
           <div className={styles["window-action-button"]}>
             <IconButton
               icon={<ClearIcon />}
-              onClick={clearSessions}
+              onClick={() => {
+                const confirmed = window.confirm(
+                  `${Locale.Settings.Actions.ConfirmClearAll.Confirm}`,
+                );
+                if (confirmed) {
+                  clearSessions();
+                }
+              }}
               bordered
               title={Locale.Settings.Actions.ClearAll}
             />
@@ -147,7 +154,14 @@ export function Settings(props: { closeSettings: () => void }) {
           <div className={styles["window-action-button"]}>
             <IconButton
               icon={<ResetIcon />}
-              onClick={resetConfig}
+              onClick={() => {
+                const confirmed = window.confirm(
+                  `${Locale.Settings.Actions.ConfirmResetAll.Confirm}`,
+                );
+                if (confirmed) {
+                  resetConfig();
+                }
+              }}
               bordered
               title={Locale.Settings.Actions.ResetAll}
             />
