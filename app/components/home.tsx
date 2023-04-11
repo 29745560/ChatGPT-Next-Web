@@ -2,13 +2,7 @@
 
 require("../polyfill");
 
-import {
-  useState,
-  useEffect,
-  useRef,
-  useCallback,
-  MouseEventHandler,
-} from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { IconButton } from "./button";
 import styles from "./home.module.scss";
@@ -27,7 +21,6 @@ import Locale from "../locales";
 import { Chat } from "./chat";
 import dynamic from "next/dynamic";
 import { ErrorBoundary } from "./error";
-import { useDebounce } from "use-debounce";
 
 export function Loading(props: { noLogo?: boolean }) {
   return (

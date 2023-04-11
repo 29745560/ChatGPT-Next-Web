@@ -82,7 +82,6 @@ export function Settings(props: { closeSettings: () => void }) {
       state.clearAllData,
       state.clearSessions,
     ]);
-
   const [usage, setUsage] = useState<{
     used?: number;
     subscription?: number;
