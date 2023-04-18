@@ -20,6 +20,7 @@ import {
   useChatStore,
   Theme,
   ALL_MODELS,
+  useUpdateStore,
   useAccessStore,
   ModalConfigValidator,
 } from "../store";
@@ -183,6 +184,7 @@ export function Settings(props: { closeSettings: () => void }) {
       state.clearAllData,
       state.clearSessions,
     ]);
+  const updateStore = useUpdateStore();
   const usage = {
     used: updateStore.used,
     subscription: updateStore.subscription,
