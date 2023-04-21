@@ -28,9 +28,11 @@ import { Avatar } from "./chat";
 
 import Locale, { AllLangs, changeLang, getLang } from "../locales";
 import { copyToClipboard, getEmojiUrl } from "../utils";
+import { Path } from "../constant";
 import { Prompt, SearchService, usePromptStore } from "../store/prompt";
 import { ErrorBoundary } from "./error";
 import { InputRange } from "./input-range";
+import { useNavigate } from "react-router-dom";
 
 function UserPromptModal(props: { onClose?: () => void }) {
   const promptStore = usePromptStore();
@@ -174,7 +176,8 @@ function PasswordInput(props: HTMLProps<HTMLInputElement>) {
   );
 }
 
-export function Settings(props: { closeSettings: () => void }) {
+export function Settings() {
+  const navigate = useNavigate();
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
   const [config, updateConfig, resetConfig, clearAllData, clearSessions] =
     useChatStore((state) => [
@@ -217,7 +220,7 @@ export function Settings(props: { closeSettings: () => void }) {
   useEffect(() => {
     const keydownEvent = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        props.closeSettings();
+        navigate(Path.Home);
       }
     };
     document.addEventListener("keydown", keydownEvent);
@@ -272,7 +275,7 @@ export function Settings(props: { closeSettings: () => void }) {
           <div className={styles["window-action-button"]}>
             <IconButton
               icon={<CloseIcon />}
-              onClick={props.closeSettings}
+              onClick={() => navigate(Path.Home)}
               bordered
               title={Locale.Settings.Actions.Close}
             />
