@@ -23,6 +23,7 @@ import {
   useUpdateStore,
   useAccessStore,
   ModalConfigValidator,
+  useAppConfig,
 } from "../store";
 import { Avatar } from "./chat";
 
@@ -179,14 +180,14 @@ function PasswordInput(props: HTMLProps<HTMLInputElement>) {
 export function Settings() {
   const navigate = useNavigate();
   const [showEmojiPicker, setShowEmojiPicker] = useState(false);
-  const [config, updateConfig, resetConfig, clearAllData, clearSessions] =
-    useChatStore((state) => [
-      state.config,
-      state.updateConfig,
-      state.resetConfig,
-      state.clearAllData,
-      state.clearSessions,
-    ]);
+  const config = useAppConfig();
+  const updateConfig = config.update;
+  const resetConfig = config.reset;
+  const [clearAllData, clearSessions] = useChatStore((state) => [
+    state.clearAllData,
+    state.clearSessions,
+  ]);
+  
   const updateStore = useUpdateStore();
   const usage = {
     used: updateStore.used,
@@ -603,7 +604,7 @@ export function Settings() {
               value={config.modelConfig.presence_penalty?.toFixed(1)}
               min="-2"
               max="2"
-              step="0.5"
+              step="0.1"
               onChange={(e) => {
                 updateConfig(
                   (config) =>
