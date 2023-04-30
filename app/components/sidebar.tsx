@@ -7,6 +7,9 @@ import SettingsIcon from "../icons/settings.svg";
 import ChatGptIcon from "../icons/chatgpt.svg";
 import AddIcon from "../icons/add.svg";
 import CloseIcon from "../icons/close.svg";
+import MaskIcon from "../icons/mask.svg";
+import PluginIcon from "../icons/plugin.svg";
+
 import Locale from "../locales";
 
 import { useAppConfig, useChatStore } from "../store";
@@ -21,6 +24,7 @@ import {
 import { Link, useNavigate } from "react-router-dom";
 import { useMobileScreen } from "../utils";
 import dynamic from "next/dynamic";
+import { showToast } from "./ui-lib";
 
 const ChatList = dynamic(async () => (await import("./chat-list")).ChatList, {
   loading: () => null,
@@ -81,6 +85,8 @@ export function SideBar(props: { className?: string }) {
   const { onDragMouseDown, shouldNarrow } = useDragSideBar();
   const navigate = useNavigate();
 
+  const config = useAppConfig();
+
   return (
     <div
       className={`${styles.sidebar} ${props.className} ${
@@ -92,9 +98,26 @@ export function SideBar(props: { className?: string }) {
         <div className={styles["sidebar-sub-title"]}>
           白水实验室出品
         </div>
-        <div className={styles["sidebar-logo"]}>
+        <div className={styles["sidebar-logo"] + " no-dark"}>
           <ChatGptIcon />
         </div>
+      </div>
+
+      <div className={styles["sidebar-header-bar"]}>
+        <IconButton
+          icon={<MaskIcon />}
+          text={shouldNarrow ? undefined : Locale.Mask.Name}
+          className={styles["sidebar-bar-button"]}
+          onClick={() => navigate(Path.NewChat, { state: { fromHome: true } })}
+          shadow
+        />
+        <IconButton
+          icon={<PluginIcon />}
+          text={shouldNarrow ? undefined : Locale.Plugin.Name}
+          className={styles["sidebar-bar-button"]}
+          onClick={() => showToast(Locale.WIP)}
+          shadow
+        />
       </div>
 
       <div
@@ -127,7 +150,11 @@ export function SideBar(props: { className?: string }) {
             icon={<AddIcon />}
             text={shouldNarrow ? undefined : Locale.Home.NewChat}
             onClick={() => {
-              chatStore.newSession();
+              if (config.dontShowMaskSplashScreen) {
+                chatStore.newSession();
+              } else {
+                navigate(Path.NewChat);
+              }
             }}
             shadow
           />
