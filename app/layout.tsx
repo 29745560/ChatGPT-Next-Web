@@ -3,10 +3,11 @@ import "./styles/globals.scss";
 import "./styles/markdown.scss";
 import "./styles/highlight.scss";
 import { getClientConfig } from "./config/client";
+import { type Metadata } from 'next';
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "RongChat",
-  description: "Your personal ChatGPT Chat Bot.",
+  description: "白水人工智能实验室出品",
   viewport: {
     width: "device-width",
     initialScale: 1,
