@@ -119,7 +119,7 @@ export function SideBar(props: { className?: string }) {
           RongChat
         </div>
         <div className={styles["sidebar-sub-title"]}>
-          白水实验室出品
+          白水人工智能实验室出品
         </div>
         <div className={styles["sidebar-logo"] + " no-dark"}>
           <ChatGptIcon />
