@@ -49,6 +49,7 @@ import Locale, {
   getLang,
 } from "../locales";
 import { copyToClipboard } from "../utils";
+import { Path } from "../constant";
 import { Prompt, SearchService, usePromptStore } from "../store/prompt";
 import { ErrorBoundary } from "./error";
 import { InputRange } from "./input-range";
