@@ -55,6 +55,7 @@ import {
   Baidu,
   ByteDance,
   Alibaba,
+  Moonshot,
   Google,
   GoogleSafetySettingsThreshold,
   OPENAI_BASE_URL,
@@ -1018,6 +1019,45 @@ export function Settings() {
     </>
   );
 
+  const moonshotConfigComponent = accessStore.provider ===
+    ServiceProvider.Moonshot && (
+    <>
+      <ListItem
+        title={Locale.Settings.Access.Moonshot.Endpoint.Title}
+        subTitle={
+          Locale.Settings.Access.Moonshot.Endpoint.SubTitle +
+          Moonshot.ExampleEndpoint
+        }
+      >
+        <input
+          type="text"
+          value={accessStore.moonshotUrl}
+          placeholder={Moonshot.ExampleEndpoint}
+          onChange={(e) =>
+            accessStore.update(
+              (access) => (access.moonshotUrl = e.currentTarget.value),
+            )
+          }
+        ></input>
+      </ListItem>
+      <ListItem
+        title={Locale.Settings.Access.Moonshot.ApiKey.Title}
+        subTitle={Locale.Settings.Access.Moonshot.ApiKey.SubTitle}
+      >
+        <PasswordInput
+          value={accessStore.moonshotApiKey}
+          type="text"
+          placeholder={Locale.Settings.Access.Moonshot.ApiKey.Placeholder}
+          onChange={(e) => {
+            accessStore.update(
+              (access) => (access.moonshotApiKey = e.currentTarget.value),
+            );
+          }}
+        />
+      </ListItem>
+    </>
+  );
+
   const stabilityConfigComponent = accessStore.provider ===
     ServiceProvider.Stability && (
     <>
@@ -1315,6 +1355,7 @@ export function Settings() {
                   {baiduConfigComponent}
                   {byteDanceConfigComponent}
                   {alibabaConfigComponent}
+                  {moonshotConfigComponent}
                   {stabilityConfigComponent}
                 </>
               )}
