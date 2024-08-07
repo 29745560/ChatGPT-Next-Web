@@ -65,6 +65,7 @@ import {
   ServiceProvider,
   SlotID,
   Stability,
+  Iflytek,
 } from "../constant";
 import { Prompt, SearchService, usePromptStore } from "../store/prompt";
 import { ErrorBoundary } from "./error";
@@ -1148,6 +1149,60 @@ export function Settings() {
       </ListItem>
     </>
   );
+  const lflytekConfigComponent = accessStore.provider ===
+    ServiceProvider.Iflytek && (
+    <>
+      <ListItem
+        title={Locale.Settings.Access.Iflytek.Endpoint.Title}
+        subTitle={
+          Locale.Settings.Access.Iflytek.Endpoint.SubTitle +
+          Iflytek.ExampleEndpoint
+        }
+      >
+        <input
+          type="text"
+          value={accessStore.iflytekUrl}
+          placeholder={Iflytek.ExampleEndpoint}
+          onChange={(e) =>
+            accessStore.update(
+              (access) => (access.iflytekUrl = e.currentTarget.value),
+            )
+          }
+        ></input>
+      </ListItem>
+      <ListItem
+        title={Locale.Settings.Access.Iflytek.ApiKey.Title}
+        subTitle={Locale.Settings.Access.Iflytek.ApiKey.SubTitle}
+      >
+        <PasswordInput
+          value={accessStore.iflytekApiKey}
+          type="text"
+          placeholder={Locale.Settings.Access.Iflytek.ApiKey.Placeholder}
+          onChange={(e) => {
+            accessStore.update(
+              (access) => (access.iflytekApiKey = e.currentTarget.value),
+            );
+          }}
+        />
+      </ListItem>
+
+      <ListItem
+        title={Locale.Settings.Access.Iflytek.ApiSecret.Title}
+        subTitle={Locale.Settings.Access.Iflytek.ApiSecret.SubTitle}
+      >
+        <PasswordInput
+          value={accessStore.iflytekApiSecret}
+          type="text"
+          placeholder={Locale.Settings.Access.Iflytek.ApiSecret.Placeholder}
+          onChange={(e) => {
+            accessStore.update(
+              (access) => (access.iflytekApiSecret = e.currentTarget.value),
+            );
+          }}
+        />
+      </ListItem>
+    </>
+  );
 
   return (
     <ErrorBoundary>
@@ -1426,6 +1481,7 @@ export function Settings() {
                   {tencentConfigComponent}
                   {moonshotConfigComponent}
                   {stabilityConfigComponent}
+                  {lflytekConfigComponent}
                 </>
               )}
             </>
